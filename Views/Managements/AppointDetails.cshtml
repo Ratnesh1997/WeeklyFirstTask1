@@ -1,0 +1,158 @@
+﻿@model WeeklyFirstTask.Models.Doctor
+@using Microsoft.AspNetCore.Http;
+
+@{
+    ViewData["Title"] = "AppointDetails";
+}
+<h1 style="text-align:center;style=" color:blue;">
+    Hospital Management System
+</h1>
+<h1 style="text-align:center;style=" color:blue;">AppointDetails</h1>
+<p style="color:blue;font-size:25px;" align=right>
+    Welcome :- @Context.Session.GetString("UserName")
+</p>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="DoctorDetails">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                @*<label asp-for="DName" class="control-label"></label>*@
+                <input type="hidden" asp-for="DId" class="form-control" />
+                @*<span aspsdvalidation-for="DName" class="text-danger"></span>*@
+            </div>
+            <div class="form-group">
+                <label asp-for="DName" class="control-label"></label>
+                <input asp-for="DName" class="form-control" disabled />
+                <span asp-validation-for="DName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Contact" class="control-label"></label>
+                <input asp-for="Contact" class="form-control" disabled />
+                <span asp-validation-for="Contact" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Specialization" class="control-label"></label>
+                <input asp-for="Specialization" class="form-control" disabled />
+                <span asp-validation-for="Specialization" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GetDate" class="control-label"></label>
+                <input type="date" asp-for="GetDate" id="nowdate" onfocus="this.min=new Date().toISOString().split('T')[0]">
+                <span asp-validation-for="GetDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GetTime" class="control-label"></label>
+                <input type="time" asp-for="GetTime" id="nowtime">
+                <span asp-validation-for="GetTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Appoint" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+@*<script>
+
+
+    $('#submit').on('click', function (e) {
+
+    // preventing normal form submit
+    e.preventDefault();
+
+    //// create new FormData object
+    //var formData = new FormData();
+
+    //// check total amount of uploaded files in file input
+    //var filesLength = $("#files")[0].files.length;
+
+    //// check if the file length exceeds 10 files
+    //if (filesLength > 10) {
+    //    alert("You can upload at maximum of 10 files");
+    //    return false;
+    //}
+    //else {
+    //    // append files to FormData object and send with AJAX callback
+    //    for (var i = 0; i < filesLength; i++) {
+    //        formData.append("files", $("#files")[0].files[i]);
+    //    }
+
+        $.ajax({
+            url: '@Url.Action("AppointmentDetails", "Managements")',
+            type: 'POST',
+            data: formData,
+        //    // other AJAX options here
+
+        //    success: function (result) {
+        //        // update partial view here
+        //    }
+        //    error: function (xhr, status, err) {
+        //        // error handling
+        //    }
+        //});
+    })
+});
+
+</script>*@
+
+@*<script>
+    $(document).ready(function () {
+        var today = new Date();
+        var strDate = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+        $("#nowdate").val(strDate);
+
+        $("#nowdate").click(function () {
+            $('#nowdate').attr('type', 'date')
+        })
+    });*@
+
+@*</script>*@
+
+
+<script>
+    $(document).ready(function () {
+        var dt = new Date();
+        var time = dt.getHours() + ":" + dt.getMinutes();
+        $("#nowtime").val(time);
+
+        $("#nowtime").click(function () {
+            $('#nowtime').attr('type', 'time')
+        })
+    });
+
+</script>
+
+@*<script language="javascript">
+        $(document).ready(function () {
+            $("#txtdate").datepicker({
+                minDate: 0,
+                minTime: 0,
+            });
+        });
+    </script>*@
+
+@*<script>
+
+    $(document).ready(function() {
+        $("#EnterDate").datepicker({
+            dateFormat:"dd-mm-yy",
+            minDate: -0,
+
+
+        });
+    });
+        </script>*@
+@*<script type="text/javascript">
+            $('#datefield').datepicker({minDate: 0 });
+    </script>*@
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

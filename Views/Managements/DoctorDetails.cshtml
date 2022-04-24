@@ -1,0 +1,55 @@
+﻿@model IEnumerable<WeeklyFirstTask.Models.Doctor>
+@using Microsoft.AspNetCore.Http;
+@{
+    Layout = "_Layout1";
+}
+<h1 style="text-align:center;style=" color:blue;">Hospital Management System</h1>
+<p style="color:blue;font-size:25px;" align=right>
+    Welcome :- @Context.Session.GetString("UserName")
+</p>
+
+<div class="table-responsive">
+    <tr>
+        <td><a align="right" asp-action="Logout" asp-controller="LoginSign" class="btn-outline-danger">Logout</a></td>
+
+    </tr>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Contact No</th>
+                <th>Specilist</th>
+                <th>Date</th>
+                <th>Time</th>
+
+                <th>Action</th>
+
+
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+
+                <td>@item.DName</td>
+                <td>@item.Contact</td>
+                <td>@item.Specialization</td>
+                <td>@item.GetDate</td>
+                <td>@item.GetTime</td>
+
+
+                <td><a asp-action="AppointDetails" asp-controller="Managements" asp-Route-Id="@item.DId" class="btn-outline-danger">Book Appointment</a></td>
+
+
+            </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
